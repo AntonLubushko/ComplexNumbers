@@ -11,9 +11,9 @@ public class ComplexTest {
 
     @Test
     public void createComplexByString() throws Exception {
-        Complex complex = Complex.createComplexByString("7.8+i9.0");
+        Complex complex = Complex.createComplexByString("-7.8+i9.0");
         System.out.println(complex);
-        boolean correct=(7.8d==complex.getRe())&&(9d==complex.getIm());
+        boolean correct = (-7.8d == complex.getRe()) && (9d == complex.getIm());
         Assert.assertTrue(correct);
     }
 
@@ -28,9 +28,10 @@ public class ComplexTest {
 
     @Test
     public void inverse() throws Exception {
-Complex complex=new Complex(11,46);
-        Complex inversed=complex.inverse();
-        System.out.println(inversed);
+        Complex complex = new Complex(11, 46);
+        Complex inversed = complex.inverse();
+        Complex inversed2 = new Complex(1, 0).divide(complex);
+        Assert.assertEquals(inversed, inversed2);
     }
 
     @Test
@@ -44,17 +45,27 @@ Complex complex=new Complex(11,46);
         Complex complex2 = new Complex(10, 11);
         Complex sum1 = complex1.sum(complex2);
         Complex sum2 = complex2.sum(complex1);
-        Assert.assertEquals(new Complex(11,12),sum1);
-        Assert.assertEquals(new Complex(11,12),sum2);
+        Assert.assertEquals(new Complex(11, 12), sum1);
+        Assert.assertEquals(new Complex(11, 12), sum2);
     }
 
     @Test
     public void subtract() throws Exception {
-
+        Complex complex1 = new Complex(1, 1);
+        Complex complex2 = new Complex(10, 11);
+        Complex diff1 = complex1.subtract(complex2);
+        Complex diff2 = complex2.subtract(complex1);
+        Assert.assertEquals(new Complex(-9, -10), diff1);
+        Assert.assertEquals(new Complex(9, 10), diff2);
     }
 
     @Test
     public void multiply() throws Exception {
+        Complex complex1 = new Complex(3, 7);
+        Complex complex2 = new Complex(10, 11);
+        Complex mult = complex1.multiply(complex2);
+        Assert.assertEquals(mult.getRe(), -47, 0);
+        Assert.assertEquals(mult.getIm(), 103, 0);
 
     }
 
@@ -92,25 +103,4 @@ Complex complex=new Complex(11,46);
     public void toFormatedString() throws Exception {
 
     }
-
-    @Test
-    public void getRe() throws Exception {
-
-    }
-
-    @Test
-    public void getIm() throws Exception {
-
-    }
-
-    @Test
-    public void getModule() throws Exception {
-
-    }
-
-    @Test
-    public void getArgument() throws Exception {
-
-    }
-
-}
+ }

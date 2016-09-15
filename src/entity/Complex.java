@@ -28,7 +28,7 @@ public class Complex {
         }
     }
 
-    // конструктор по строковому представлению комплексного числа
+    //  по строковому представлению комплексного числа
     public static Complex createComplexByString(String string) throws NoSuchComplexException {
         string = string.replaceAll(" ", "");
         boolean isMatch1 = string
@@ -256,8 +256,6 @@ public class Complex {
     // метод получения числа, сопряжённого комплексному
     public Complex mated(Complex complex) {
         Complex matedDivider = new Complex(complex.re, -complex.im);
-        makeModule(matedDivider);
-        makeArgument(matedDivider);
         return matedDivider;
     }
 
@@ -273,9 +271,9 @@ public class Complex {
     }
 
     //  метод разности комплекных чисел
-    public Complex subtract(Complex minuend, Complex subtrahend) {
-        double re = minuend.re - subtrahend.re;
-        double im = minuend.im - subtrahend.im;
+    public Complex subtract(Complex subtrahend) {
+        double re = this.re - subtrahend.re;
+        double im = this.im - subtrahend.im;
         isCorrectNumber(re);
         isCorrectNumber(im);
         Complex diff = new Complex(re, im);
@@ -301,8 +299,6 @@ public class Complex {
         double squaredDividerModule = divider.module * divider.module;
         double re = (this.re * divider.re - this.im * divider.im) / squaredDividerModule;
         double im = (this.re * divider.im + this.im * divider.re) / squaredDividerModule;
-        isCorrectNumber(re);
-        isCorrectNumber(im);
         Complex quotient = new Complex(re, im);
         return quotient;
     }
@@ -420,7 +416,7 @@ public class Complex {
     }
 
     // метод представления комплексного числа в тригонометрической форме
-    public String trigonometric() {
+    public String toTrigonometric() {
         String z = "";
         if (module == (int) module) {
             z = "" + (int) module + "*(cos(" + argument + ")+i*sin(" + argument
@@ -433,7 +429,7 @@ public class Complex {
     }
 
     // метод представления комплексного числа в показательной форме
-    public String exponent() {
+    public String toExponent() {
         String z = "";
         if (module == (int) module) {
             z = "" + (int) module + "*e^(" + argument + "*i)";
